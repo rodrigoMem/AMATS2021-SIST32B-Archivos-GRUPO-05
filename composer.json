@@ -1,0 +1,19 @@
+{
+    "name": "demo/citas",
+    "autoload": {
+        "psr-4": {
+             "Core\\": "Core/",
+             "App\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "RODRIGO MERINO",
+            "email": "joserodrigo48.jr@gmail.com"
+        }
+    ],
+    "require": {
+        "philo/laravel-blade": "^3.1"
+
+    }
+}
