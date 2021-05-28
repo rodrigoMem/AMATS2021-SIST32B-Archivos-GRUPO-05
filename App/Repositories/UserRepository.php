@@ -22,16 +22,16 @@ class UserRepository
     {
         try {
 
-            $stmt = $this->_db->query('SELECT id,name,password FROM users');
+            $stmt = $this->_db->query('SELECT name,image,email,address,phone_number FROM users');
             while ($obj = $stmt->fetch_object('\\App\\Models\\user')) {
                 // $result[] = [$obj->id, $obj->name];
 
 
-               $result[] = $obj; 
+               @$result[] = $obj; 
             }
-            // var_dump($result);
+           // var_dump($result);
             
-            return ($result) ;
+            return @($result) ;
         } catch (MYSQLI_DOException $e) {
             echo $e->getMessage();
         }
