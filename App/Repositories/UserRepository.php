@@ -22,7 +22,7 @@ class UserRepository
     {
         try {
 
-            $stmt = $this->_db->query('SELECT name,image,email,address,phone_number FROM users');
+            $stmt = $this->_db->query('SELECT id,name,image,email,address,phone_number FROM users');
             while ($obj = $stmt->fetch_object('\\App\\Models\\user')) {
                 // $result[] = [$obj->id, $obj->name];
 
@@ -60,4 +60,15 @@ class UserRepository
             ');
 
     }
+    public function editDoctor($request){
+        $this->_db->query("UPDATE  users SET name= '$request->name' WHERE id= '$request->id'");
+           
+   }
+
+   public function deleteDoctor($request){
+    $this->_db->query("DELETE  FROM users  WHERE id= '$request->id'");
+       
+       
+
+}
 }

@@ -43,4 +43,27 @@ class UserService
             return  $this->_userRepository->createDoctor($request);
         }
     }
+
+    public function editDoctor()
+    {
+
+        if (Request::hasData('post')) {
+            
+            $request = Request::getData('post');
+
+            return  $this->_userRepository->editDoctor($request);
+        }
+    }
+
+    
+    public function deleteDoctor()
+    {
+
+        if (Request::hasData('post')) {
+            
+            $request = Request::getData('post');
+
+            return  $this->_userRepository->deleteDoctor($request);
+        }
+    }
 }

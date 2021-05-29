@@ -6,7 +6,7 @@ class Redirect
 {
     public static function to($page)
     {
-        header("location: http://localhost:8080/phpEcommerce/public/$page");
+        header("location: http://appointments.testenv:8080/$page");
     }
     
     /**

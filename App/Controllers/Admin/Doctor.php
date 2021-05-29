@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use Core\View;
 use \App\Services\RoleService;
 use \App\Services\UserService;
+use App\Helpers\Redirect;
 
 class Doctor extends \Core\Controller
 {
@@ -40,5 +41,17 @@ class Doctor extends \Core\Controller
         View::bladeRenderTemplate('admin/doctorRegister', ['roles' => $roles]);
     }
 
+public function editAction()
+{
+    $this->_userService->editDoctor();
 
+}
+
+
+public function deleteAction()
+{
+
+    $this->_userService->deleteDoctor();
+Redirect::to("admin/doctor/getall");
+}
 }
