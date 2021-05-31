@@ -23,8 +23,7 @@ class Doctor extends \Core\Controller
     public function getAllAction()
     {
         $doctor = $this->_userService->getAll();
-        View::bladeRenderTemplate('admin/doctorTable',  ['doctors' => $doctor]);    
-    
+        View::bladeRenderTemplate('admin/doctorTable',  ['doctors' => $doctor]);
     }
 
 
@@ -41,17 +40,16 @@ class Doctor extends \Core\Controller
         View::bladeRenderTemplate('admin/doctorRegister', ['roles' => $roles]);
     }
 
-public function editAction()
-{
-    $this->_userService->editDoctor();
+    public function editAction()
+    {
+        $this->_userService->editDoctor();
+    }
 
-}
 
+    public function deleteAction()
+    {
 
-public function deleteAction()
-{
-
-    $this->_userService->deleteDoctor();
-Redirect::to("admin/doctor/getall");
-}
+        $this->_userService->deleteDoctor();
+        Redirect::to("admin/doctor/getall");
+    }
 }

@@ -17,4 +17,7 @@ class Auth extends \Core\Controller
         $this->_userService->createUser();
         View::bladeRenderTemplate('auth/base');
     }
+
+
+   
 }
