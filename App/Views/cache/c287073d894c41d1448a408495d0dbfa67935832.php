@@ -4,6 +4,7 @@
     <div class=" container-fluid">
 <form method="post" action="create">
     
+    <input type="hidden" name="appointment_id" >
         <div class="card mb-5">
             <div class="card-body">
                 <h5 class="card-title">Seleccionar fecha</h5>
@@ -14,12 +15,12 @@
         
 <div class="custom-control custom-checkbox">
     <input type="checkbox" class="custom-control-input" 
-        id="Check-item1" 
+        id="Check-all" 
         onclick="
         for( item in document.getElementsByName('time[]')) 
         document.getElementsByName('time[]').item(item).checked =this.checked" >
 
-    <label class="custom-control-label" for="Check-item1">Marcar todo</label>
+    <label class="custom-control-label" for="Check-all">Marcar todo</label>
 </div>
 
         <div class="row">
@@ -401,4 +402,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('includes.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\citasProject\App\Views/doctor/appoinmentsTable.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('doctor.layouts.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\citasProject\App\Views/doctor/appoinmentsTable.blade.php ENDPATH**/ ?>

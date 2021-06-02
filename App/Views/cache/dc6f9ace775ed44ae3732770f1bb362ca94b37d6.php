@@ -56,12 +56,16 @@
                  </thead>
 
                  <tbody>
+                     <?php $__currentLoopData = $doctors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $doctor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                     
                      <tr>
-                         <td></td>
-                         <td> </td>
-                         <td></td>
-                         <td><button type="button" class="btn btn-success">Agendar Cita</button></td>
-                     </tr>
+                        <td><?php echo e($doctor[0]); ?></td>
+                        <td><?php echo e($doctor[1]); ?> </td>
+                        <td></td>
+                        <td><button type="button" class="btn btn-success">Agendar Cita</button></td>
+                    </tr>
+                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    
                  </tbody>
              </table>
          </div>

@@ -56,12 +56,16 @@
                  </thead>
 
                  <tbody>
+                     @foreach ($doctors as $doctor)
+                     {{-- mapper esto --}}
                      <tr>
-                         <td></td>
-                         <td> </td>
-                         <td></td>
-                         <td><button type="button" class="btn btn-success">Agendar Cita</button></td>
-                     </tr>
+                        <td>{{$doctor[0]}}</td>
+                        <td>{{$doctor[1]}} </td>
+                        <td></td>
+                        <td><button type="button" class="btn btn-success">Agendar Cita</button></td>
+                    </tr>
+                     @endforeach
+                    
                  </tbody>
              </table>
          </div>

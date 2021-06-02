@@ -66,4 +66,10 @@ class UserService
             return  $this->_userRepository->deleteDoctor($request);
         }
     }
+
+    public function getDoctor()
+    {
+        return  $this->_userRepository->getDoctors();
+
+    }
 }
