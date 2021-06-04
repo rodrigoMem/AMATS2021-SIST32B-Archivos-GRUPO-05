@@ -27,7 +27,7 @@
     <div class="d-flex" id="wrapper">
    
         <div class="container-fluid">
-            <?php echo $__env->make('auth.register', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->yieldContent('content'); ?>
         </div>
 </div>
 
@@ -47,4 +47,4 @@
 
 
 </script>
-<?php /**PATH C:\xampp\htdocs\citasProject\App\Views/auth/base.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\citasProject\App\Views/auth/layouts/base.blade.php ENDPATH**/ ?>

@@ -27,12 +27,10 @@
 </header>
 <body>
 
-    <div class="d-flex" id="wrapper">
 
         <div class="container-fluid">
-        <?php echo $__env->make('home.home', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->yieldContent('content'); ?>
         </div>
-    </div>
 
     </div>
     <div>

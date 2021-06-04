@@ -84,4 +84,18 @@ class AppointmentRepository
         $doctorAppointments = $this->_db->query("SELECT * FROM appointments WHERE user_id = '31'")->fetch_all();
         return $doctorAppointments;
     }
+
+
+    public function newPatientAppointment($doctorid, $date)
+    {
+        $appointment =$this->_db->query("SELECT * FROM appointments WHERE user_id = '$doctorid' AND date ='$date'")->fetch_all();
+
+        foreach($appointment as $appointmentid){
+            $times = $this->_db->query("SELECT * FROM times WHERE appointment_id = '$appointmentid[0]'")->fetch_all();
+
+        }
+
+
+        return $times;
+    }
 }

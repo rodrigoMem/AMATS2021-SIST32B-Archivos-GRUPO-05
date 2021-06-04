@@ -27,12 +27,10 @@
 </header>
 <body>
 
-    <div class="d-flex" id="wrapper">
 
         <div class="container-fluid">
-        @include('home.home')
+            @yield('content')
         </div>
-    </div>
 
     </div>
     <div>

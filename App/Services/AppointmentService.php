@@ -50,8 +50,9 @@ class AppointmentService
             return  $this->_appointmentRepository->getAllAppointments();
     }
 
-    public function newAppointment()
+    public function newPatientAppointment($doctorid,$date)
     {
+        return  $this->_appointmentRepository->newPatientAppointment($doctorid,$date);
         
     }
 }

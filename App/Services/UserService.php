@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
-use App\Repositories\UserRepository;
 use App\Helpers\Request;
+use Core\SessionHandler;
+use App\Repositories\UserRepository;
 use App\Validators\RequestValidation;
+use Core\View;
 
 class UserService
 {
@@ -27,7 +29,7 @@ class UserService
     {
 
         if (Request::hasData('post')) {
-            
+
             $request = Request::getData('post');
 
             return  $this->_userRepository->createUser($request);
@@ -37,7 +39,7 @@ class UserService
     {
 
         if (Request::hasData('post')) {
-            
+
             $request = Request::getData('post');
 
             return  $this->_userRepository->createDoctor($request);
@@ -48,19 +50,19 @@ class UserService
     {
 
         if (Request::hasData('post')) {
-            
+
             $request = Request::getData('post');
 
             return  $this->_userRepository->editDoctor($request);
         }
     }
 
-    
+
     public function deleteDoctor()
     {
 
         if (Request::hasData('post')) {
-            
+
             $request = Request::getData('post');
 
             return  $this->_userRepository->deleteDoctor($request);
@@ -70,6 +72,15 @@ class UserService
     public function getDoctor()
     {
         return  $this->_userRepository->getDoctors();
+    }
+    public function login()
+    {
+        if (Request::hasData('post')) {
 
+            $request = Request::getData('post');
+            return $this->_userRepository->loginUser($request);
+           
+              
+        }
     }
 }

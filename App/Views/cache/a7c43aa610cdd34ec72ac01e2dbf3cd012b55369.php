@@ -5,7 +5,7 @@
         
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li>
-                    <a name="" id="" class="btn btn-outline-secondary" href="auth/register" role="button">Login</a>
+                    <a name="" id="" class="btn btn-outline-secondary" href="/register" role="button">Login</a>
                     
                 </li>
             </ul>

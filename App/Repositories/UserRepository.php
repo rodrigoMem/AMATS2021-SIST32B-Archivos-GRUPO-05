@@ -7,7 +7,10 @@
 
 namespace App\Repositories;
 
+use App\Helpers\Redirect;
+use Core\View;
 use Core\Model;
+use Core\SessionHandler;
 
 class UserRepository
 {
@@ -40,12 +43,36 @@ class UserRepository
 
     public function createUser($request)
     {
-        $stmt = $this->_db->query('INSERT INTO users (name,password )
+        $role_id = 3;
+         $this->_db->query('INSERT INTO users (name,password,email,role_id )
          VALUES("' .
             $request->name . '","' .
-            $request->password . '")
+            trim(password_hash($request->password, PASSWORD_DEFAULT)) . '","' .
+            $request->email . '","' . $role_id . '")
             ');
+
+       
     }
+
+    public function loginUser($request)
+    {
+        $stmt = $this->_db->query("SELECT id,name,email,password FROM users  WHERE name = '$request->name' ");
+        $user = $stmt->fetch_object('\\App\\Models\\user');
+
+VAR_DUMP($user);
+VAR_DUMP($user->password);
+
+        if ($user) {
+            if (!password_verify($request->password,$user->password)) {
+              
+            } else {
+                SessionHandler::addSession("SESSION_USER_ID", $user->id);
+                SessionHandler::addSession("SESSION_USER_NAME", $user->name);
+                Redirect::to(" ");
+            }
+        }
+    }
+
 
     public function createDoctor($request)
     {
@@ -73,10 +100,9 @@ class UserRepository
 
     public function getDoctors()
     {
-        $stmt = $this->_db->query('SELECT appointments.id, appointments.date,  users.name,users.id
+        $stmt = $this->_db->query('SELECT appointments.id, appointments.date,  users.name,users.id,users.email
         FROM  appointments
-        JOIN users ON appointments.user_id=users.id WHERE  users.role_id = 2 AND appointments.user_id = 31;')->fetch_all();
+        JOIN users ON appointments.user_id=users.id')->fetch_all();
         return $stmt;
-
     }
 }

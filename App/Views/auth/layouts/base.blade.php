@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - <?php echo $__env->yieldContent('title'); ?> </title>
+    <title>Admin Panel - @yield('title') </title>
 <link rel="stylesheet" href="../../css/build.css">
   <!-- Bootstrap core CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
     <div class="d-flex" id="wrapper">
    
         <div class="container-fluid">
-            <?php echo $__env->make('auth.register', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            @yield('content')
         </div>
 </div>
 
@@ -47,4 +47,3 @@
 
 
 </script>
-<?php /**PATH C:\xampp\htdocs\citasProject\App\Views/auth/base.blade.php ENDPATH**/ ?>

@@ -1,3 +1,5 @@
+@extends('auth.layouts.base')
+@section('content')
 <form action="register" method="post">
     <div class="container register-form">
         <div class="form">
@@ -19,9 +21,9 @@
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="contraseña *" name="password"/>
                         </div>
-                        {{-- <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Confirmar contraseña *" name="password"/>
-                        </div> --}}
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Confirmar contraseña *" name="passwor111d"/>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btnSubmit">Submit</button>
@@ -30,3 +32,5 @@
     </div>    
     
 </form>
+    
+@endsection

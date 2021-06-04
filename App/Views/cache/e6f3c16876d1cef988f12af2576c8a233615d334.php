@@ -1,3 +1,4 @@
+<?php $__env->startSection('content'); ?>
 <form action="register" method="post">
     <div class="container register-form">
         <div class="form">
@@ -19,7 +20,9 @@
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="contraseña *" name="password"/>
                         </div>
-                        
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Confirmar contraseña *" name="passwor111d"/>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btnSubmit">Submit</button>
@@ -28,4 +31,7 @@
     </div>    
     
 </form>
-<?php /**PATH C:\xampp\htdocs\citasProject\App\Views/auth/register.blade.php ENDPATH**/ ?>
+    
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('auth.layouts.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\citasProject\App\Views/auth/register.blade.php ENDPATH**/ ?>
