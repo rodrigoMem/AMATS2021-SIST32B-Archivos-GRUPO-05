@@ -10,6 +10,7 @@ class User
     public $password;
     public $image;
     public $email;
+    public $role_id;
     public $address;
     public $phone_number; 
 

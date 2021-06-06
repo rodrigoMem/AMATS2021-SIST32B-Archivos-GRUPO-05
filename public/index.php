@@ -5,16 +5,22 @@ require '../vendor/autoload.php';
  * calling global .env variables
  */
 require_once __DIR__. '/../App/Config/_env.php';
+require_once __DIR__. '/../App/Helpers/helpers.php';
+require_once __DIR__. '/../Core/SessionHandler.php';
 
 $router = new AltoRouter();
 $router->map('GET','/','App\controllers\auth\home@homeAction','homeAction');
 $router->map('GET','/admin/get-doctors','App\controllers\admin\Doctor@getAllAction','list_doctors');
+$router->map('GET','/doctor/create-schedule','App\controllers\doctor\Appointment@createAction','doctor-schedule');
+$router->map('POST','/doctor/create-schedule','App\controllers\doctor\Appointment@createAction','create-doctor-schedule');
+$router->map('POST','/book-appointment','App\controllers\auth\Home@createBookingAction','create-booking');
 
 $router->map('GET','/register','App\controllers\auth\auth@registerAction','registerAction');
 $router->map('POST','/register','App\controllers\auth\auth@registerAction','insertAction');
 $router->map('GET','/login','App\controllers\auth\auth@loginAction','loginAction');
 $router->map('POST','/login','App\controllers\auth\auth@loginAction','loginUserAction');
 $router->map('GET','/new-Appointment/[i:id]/[*:user]','App\controllers\auth\home@newAppointmentAction','newAppointmentAction');
+$router->map('GET','/logout','App\controllers\auth\auth@logoutAction','logoutAction');
 
 $router->map('GET','/admin/getDoctors','App\controllers\Admin\Doctor@getallAction','getAllAction');
 new Core\RouterHandler($router);

@@ -1,5 +1,7 @@
 <?php
 
+use App\Services\UserService;
+use Core\SessionHandler;
 use voku\helper\Paginator;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -33,4 +35,19 @@ function pagination($page, $total, $table, $object)
     $data = Capsule::select("SELECT * FROM $table ORDER BY created_at DESC" .  $pages->get_limit());
     $categories = $object->transform($data);
     return [$categories, $pages->page_links()];
+}
+
+function isAuthenticated()
+{
+    return SessionHandler::existSession("SESSION_USER_NAME") ? true : false;
+}
+
+
+function user()
+{
+    $user = new UserService;
+    if (isAuthenticated()) {
+        return $user->checkCurrentUser();
+    }
+    return false;
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controllers\auth;
 
+use App\Helpers\Redirect;
 use Core\View;
 use Core\SessionHandler;
 use App\Services\UserService;
@@ -13,6 +14,10 @@ class Auth extends \Core\Controller
 
     public function __construct()
     {
+        if (isAuthenticated()) {
+            Redirect::to(" ");
+        }
+        
         $this->_userService = new UserService;
     }
 
@@ -23,8 +28,22 @@ class Auth extends \Core\Controller
     }
     public function loginAction()
     {
-        $user =$this->_userService->login();
-        var_dump( SessionHandler::getSession("SESSION_USER_NAME"));
+         $this->_userService->login();
+       
         View::bladeRenderTemplate('auth/login');
+    }
+
+
+    public function logoutAction()
+    {
+        
+         $this->_userService->logout();
+       
+    }
+
+    public function redirectUserAction()
+    {
+        $this->_userService->redirectUser();
+
     }
 }

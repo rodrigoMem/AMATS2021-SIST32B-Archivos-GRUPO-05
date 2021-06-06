@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Core\Model;
+use Core\SessionHandler;
 
 class AppointmentRepository
 {
@@ -16,10 +17,7 @@ class AppointmentRepository
 
     public function createAppointment($request)
     {
-        $this->_db->query("INSERT INTO appointments (date,user_id )
-        VALUES('" .
-            $request->date . "', 
-           31)");
+        $this->_db->query('INSERT INTO appointments (date,user_id ) VALUES("' . $request->date .  '","' . SessionHandler::getSession("SESSION_USER_ID") . '" )');
 
         // hacer fetch object
         $getAppointment_id =  $this->_db->query("SELECT id FROM appointments ORDER BY id DESC LIMIT 1")->fetch_array();
@@ -40,7 +38,7 @@ class AppointmentRepository
     public function checkAppointment($request)
     {
         $date = $request->date;
-        $appointment = $this->_db->query("SELECT * FROM appointments WHERE date = '$date' AND user_id = '31'")->fetch_array();
+        $appointment = $this->_db->query("SELECT * FROM appointments WHERE date = '$date' AND user_id = " . SessionHandler::getSession("SESSSION_USER_ID") . "")->fetch_array();
 
         if (!$appointment) {
             echo "date does not exits";
@@ -58,7 +56,7 @@ class AppointmentRepository
          * @return:string  
          */
         $times = $this->_db->query("SELECT * FROM times WHERE appointment_id = '$appointment_id'")->fetch_all();
-        return  array($date, $times,$getAppointment_id);
+        return  array($date, $times, $getAppointment_id);
         // var_dump($getAppointment_id);
         //  var_dump($appointment);
     }
@@ -88,14 +86,22 @@ class AppointmentRepository
 
     public function newPatientAppointment($doctorid, $date)
     {
-        $appointment =$this->_db->query("SELECT * FROM appointments WHERE user_id = '$doctorid' AND date ='$date'")->fetch_all();
+        $appointment = $this->_db->query("SELECT * FROM appointments WHERE user_id = '$doctorid' AND date ='$date'");
+        $user = $appointment->fetch_object('\\App\\Models\\Appointment');
 
-        foreach($appointment as $appointmentid){
-            $times = $this->_db->query("SELECT * FROM times WHERE appointment_id = '$appointmentid[0]'")->fetch_all();
 
+        
+        $times = $this->_db->query("SELECT * FROM times WHERE appointment_id = '$user->id' AND status = '0'");
+
+        while ($obj = $times->fetch_object('\\App\\Models\\Time')) {
+            // $result[] = [$obj->id, $obj->name];
+
+
+            @$result[] = $obj;
         }
+        // var_dump($result);
 
+        return @($result);
 
-        return $times;
     }
 }

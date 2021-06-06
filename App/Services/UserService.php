@@ -2,11 +2,12 @@
 
 namespace App\Services;
 
+use Core\View;
 use App\Helpers\Request;
 use Core\SessionHandler;
+use App\Helpers\Redirect;
 use App\Repositories\UserRepository;
 use App\Validators\RequestValidation;
-use Core\View;
 
 class UserService
 {
@@ -71,16 +72,63 @@ class UserService
 
     public function getDoctor()
     {
-        return  $this->_userRepository->getDoctors();
+        $doctors = array_slice($this->_userRepository->getDoctors(),0,5);
+        return $doctors ;
     }
+
     public function login()
     {
         if (Request::hasData('post')) {
 
             $request = Request::getData('post');
-            return $this->_userRepository->loginUser($request);
-           
-              
+            $user = $this->_userRepository->loginUser($request);
+
+            if ($user) {
+                if (!password_verify($request->password, $user->password)) {
+                    return "credentials are no correct";
+                } else {
+
+                    SessionHandler::addSession("SESSION_USER_ID", $user->id);
+                    SessionHandler::addSession("SESSION_USER_NAME", $user->name);
+                    $this->redirectUser($user->role_id);
+                }
+            }
+        }
+    }
+
+    public function logout()
+    {
+        if (isAuthenticated()) {
+            SessionHandler::removeSession("SESSION_USER_NAME");
+            SessionHandler::removeSession("SESSION_USER_ID");
+        }
+        Redirect::to(" ");
+    }
+
+    public function checkCurrentUser()
+    {
+        return $this->_userRepository->checkCurrentUser();
+    }
+
+    public function redirectUser($user)
+    {
+        switch ($user) {
+            case '1':
+                Redirect::to("admin/get-doctors");
+
+                break;
+            case '2':
+                Redirect::to("doctor/create-schedule");
+
+                break;
+            case '3':
+                Redirect::to(" ");
+
+                break;
+
+            default:
+                Redirect::to(" ");
+                break;
         }
     }
 }

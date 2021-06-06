@@ -11,8 +11,11 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-9">
-            <form action=""  method="post">
+            <form action="/book-appointment"  method="post">
+                <input type="hidden" name="doctor_id" value="{{$doctor_id}}">
+                <input type="hidden" name="date" value="{{$date}}">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{$date}}</h5>
@@ -20,16 +23,19 @@
                         @foreach ($times as $item)
                             <div class="col-md-3">
                                 <label class="btn btn-outline-primary" type="button">
-                                    <input  type="radio" name="status" value="1">
-                                    <span>{{$item[2]}}</span>
+                                    <input  type="radio" name="time" value="{{$item->time}}">
+                                    <span>{{$item->time}}</span>
                                 </label>
                             </div>
+                    <input type="hidden" name="appointment_id" value="{{$item->appointment_id}}">
+
+                            <span>{{$item->time}}</span>
                         @endforeach
                     </div>
                 </div>
             </div>
             
-                    <button type="button" name="" id="" class="btn btn-success btn-lg btn-block mt-1">Agendar Cita</button>
+                    <button type="submit" name="" id="" class="btn btn-success btn-lg btn-block mt-1">Agendar Cita</button>
             </div>
         </form>
         </div>

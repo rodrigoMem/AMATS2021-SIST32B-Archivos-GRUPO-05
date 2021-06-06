@@ -44,33 +44,21 @@ class UserRepository
     public function createUser($request)
     {
         $role_id = 3;
-         $this->_db->query('INSERT INTO users (name,password,email,role_id )
+        $this->_db->query('INSERT INTO users (name,password,email,role_id )
          VALUES("' .
             $request->name . '","' .
             trim(password_hash($request->password, PASSWORD_DEFAULT)) . '","' .
             $request->email . '","' . $role_id . '")
             ');
-
-       
     }
 
     public function loginUser($request)
     {
-        $stmt = $this->_db->query("SELECT id,name,email,password FROM users  WHERE name = '$request->name' ");
+        $stmt = $this->_db->query("SELECT id,name,email,password,role_id FROM users  WHERE name = '$request->name' ");
         $user = $stmt->fetch_object('\\App\\Models\\user');
 
-VAR_DUMP($user);
-VAR_DUMP($user->password);
 
-        if ($user) {
-            if (!password_verify($request->password,$user->password)) {
-              
-            } else {
-                SessionHandler::addSession("SESSION_USER_ID", $user->id);
-                SessionHandler::addSession("SESSION_USER_NAME", $user->name);
-                Redirect::to(" ");
-            }
-        }
+        return $user;
     }
 
 
@@ -98,11 +86,20 @@ VAR_DUMP($user->password);
         $this->_db->query("DELETE  FROM users  WHERE id= '$request->id'");
     }
 
+// move this to appointmentsrepo
     public function getDoctors()
     {
         $stmt = $this->_db->query('SELECT appointments.id, appointments.date,  users.name,users.id,users.email
         FROM  appointments
         JOIN users ON appointments.user_id=users.id')->fetch_all();
         return $stmt;
+    }
+
+    public function checkCurrentUser()
+    {
+        $stmt = $this->_db->query("SELECT id,name,email FROM users  WHERE id = " . SessionHandler::getSession("SESSION_USER_ID") . "");
+        $user = $stmt->fetch_object('\\App\\Models\\user');
+
+        return $user;
     }
 }

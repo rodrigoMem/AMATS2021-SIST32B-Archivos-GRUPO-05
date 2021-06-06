@@ -3,7 +3,7 @@
 
     <h2 class="mb-5 p-5 mr-5">Horarios<i class="fas fa-user-clock  p-2 "></i></h2>
     <div class=" container-fluid">
-<form method="post" action="create">
+<form method="post" action="create-schedule">
     
     <input type="hidden" name="appointment_id" >
         <div class="card mb-5">
