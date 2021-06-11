@@ -26,7 +26,7 @@ class UserRepository
     {
         try {
 
-            $stmt = $this->_db->query('SELECT id,name,image,email,address,phone_number FROM users');
+            $stmt = $this->_db->query('SELECT id,name,image,email,address,phone_number FROM users  WHERE role_id = 2');
             while ($obj = $stmt->fetch_object('\\App\\Models\\user')) {
                 // $result[] = [$obj->id, $obj->name];
 
@@ -97,9 +97,15 @@ class UserRepository
 
     public function checkCurrentUser()
     {
-        $stmt = $this->_db->query("SELECT id,name,email FROM users  WHERE id = " . SessionHandler::getSession("SESSION_USER_ID") . "");
+        $stmt = $this->_db->query("SELECT * FROM users  WHERE id = ". SessionHandler::getSession("SESSION_USER_ID") ."");
         $user = $stmt->fetch_object('\\App\\Models\\user');
 
         return $user;
+    }
+
+    public function editProfile($request)
+    {
+        $this->_db->query("UPDATE  users SET name= '$request->name',  address= '$request->address', phone_number = '$request->phone', description = '$request->description' WHERE id= " . SessionHandler::getSession("SESSION_USER_ID") ."");
+
     }
 }

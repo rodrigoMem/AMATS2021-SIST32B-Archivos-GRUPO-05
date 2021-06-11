@@ -122,13 +122,26 @@ class UserService
 
                 break;
             case '3':
-                Redirect::to(" ");
+                Redirect::to("my-bookings");
 
                 break;
 
             default:
                 Redirect::to(" ");
                 break;
+        }
+    }
+
+
+    public function editProfile()
+    {
+        
+        if (Request::hasData('post')) {
+
+            $request = Request::getData('post');
+            return $this->_userRepository->editProfile($request);
+
+            
         }
     }
 }

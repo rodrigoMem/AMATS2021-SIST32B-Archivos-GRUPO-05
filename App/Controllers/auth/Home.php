@@ -24,6 +24,7 @@ class Home extends \Core\Controller
 
     public function homeAction()
     {
+        
         $doctors = $this->_userService->getDoctor();
         View::bladeRenderTemplate('home/home', ["doctors" => $doctors]);
     }
@@ -38,6 +39,26 @@ class Home extends \Core\Controller
     {
         $this->_bookingService->createBooking();
         Redirect::to(' ');
+    }
 
+    public function getPatientBookingAction()
+    {
+        $PatientBooking = $this->_bookingService->getPatientBooking();
+        View::bladeRenderTemplate('patient/home',["patients"=>$PatientBooking]);
+
+    }
+
+    public function userProfileAction ()
+    {
+        $user = $this->_userService->checkCurrentUser();
+        View::bladeRenderTemplate('patient/patientProfile',compact("user"));
+
+    }
+
+    public function editProfileAction()
+    {
+        $this->_userService->editProfile();
+        Redirect::back();
+        
     }
 }

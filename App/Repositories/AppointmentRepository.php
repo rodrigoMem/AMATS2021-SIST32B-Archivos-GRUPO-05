@@ -84,6 +84,13 @@ class AppointmentRepository
     }
 
 
+    /** 
+     * @comment: cambiar el nombre 
+     * @Date: 2021-06-11 09:54:01 
+     * @param: 
+     * @param: 
+     * @return:string  
+     */
     public function newPatientAppointment($doctorid, $date)
     {
         $appointment = $this->_db->query("SELECT * FROM appointments WHERE user_id = '$doctorid' AND date ='$date'");

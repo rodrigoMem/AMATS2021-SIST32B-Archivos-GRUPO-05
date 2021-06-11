@@ -41,9 +41,9 @@ class Auth extends \Core\Controller
        
     }
 
-    public function redirectUserAction()
-    {
-        $this->_userService->redirectUser();
+    // public function redirectUserAction()
+    // {
+    //     $this->_userService->redirectUser();
 
-    }
+    // }
 }
